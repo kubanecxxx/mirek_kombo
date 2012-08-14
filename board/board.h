@@ -102,7 +102,7 @@
  * PB14 - Normal input      (SPI2 MISO).
  * PB15 - Alternate output  (SPI2 MOSI).
  */
-#define VAL_GPIOBCRL            0x88888888      /*  PB7...PB0 */
+#define VAL_GPIOBCRL            0x88866888      /*  PB7...PB0 */
 #define VAL_GPIOBCRH            0xB4B38888      /* PB15...PB8 */
 #define VAL_GPIOBODR            0xFFFFFFFF
 

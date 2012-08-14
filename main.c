@@ -21,6 +21,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
+#include "relays.h"
 
 /*
  * Application entry point.
@@ -38,15 +39,19 @@ int main(void)
 	halInit();
 	chSysInit();
 
-	palSetPadMode(GPIOC, 14, PAL_MODE_OUTPUT_PUSHPULL);
-	palSetPadMode(GPIOC, 13, PAL_MODE_OUTPUT_PUSHPULL);
+	rel_init();
+
+#ifdef RELAY_TESTING
+	rel_test();
+#endif
 
 	while (TRUE)
 	{
 		palTogglePad(GPIOC, 14);
 		palTogglePad(GPIOC, 13);
 		chThdSleepMilliseconds(500);
-
 	}
+
+
 }
 

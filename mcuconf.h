@@ -32,6 +32,8 @@
  * 0...3        Lowest...Highest.
  */
 
+//#define RELAY_TESTING
+
 /*
  * HAL driver system settings.
  */
