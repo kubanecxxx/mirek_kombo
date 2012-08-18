@@ -20,12 +20,6 @@ extern "C"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
-#define REL1_GAIN (GPIOB,7)
-#define REL2_GAIN (GPIOB,5)
-#define REL3_GAIN (GPIOB,4)
-
-#define REL_MUTE  (GPIOC,15)
-#define REL_INPUT (GPIOB,3)
 /* Exported functions --------------------------------------------------------*/
 
 #define _rel_vol1_set palSetPad(GPIOC,14)
@@ -42,12 +36,18 @@ extern "C"
 #define _rel_gain2_clear palClearPad(GPIOB,5)
 #define _rel_gain3_clear palClearPad(GPIOB,4)
 
-#define rel_mute() palSetPad(GPIOC,15)
-#define rel_unmute() palClearPad(GPIOC,15)
-#define rel_inputHigh() palSetPad (GPIOB,3)
-#define rel_inputLow() palClearPad (GPIOB,3)
+#define rel_mute() palSetPad(GPIOB,3)
+#define rel_unmute() palClearPad(GPIOB,3)
+#define rel_getMute() palReadPad(GPIOB,3)
+#define rel_inputHigh() palSetPad (GPIOC,15)
+#define rel_inputLow() palClearPad (GPIOC,15)
+#define rel_loopOn() palClearPad(GPIOA,11)
+#define rel_loopOff() palSetPad(GPIOA,11)
 
-void rel_set_channel(bool_t channel, uint8_t pot);
+#define rel_set_volume(pot) _rel_set_channel(TRUE,pot)
+#define rel_set_gain(pot) _rel_set_channel(FALSE,pot)
+
+void _rel_set_channel(bool_t channel, uint8_t pot);
 void rel_init(void);
 
 #ifdef RELAY_TESTING

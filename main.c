@@ -22,6 +22,7 @@
 #include "hal.h"
 #include "test.h"
 #include "relays.h"
+#include "shell_uart.h"
 
 /*
  * Application entry point.
@@ -40,6 +41,7 @@ int main(void)
 	chSysInit();
 
 	rel_init();
+	shell_init();
 
 #ifdef RELAY_TESTING
 	rel_test();
@@ -47,11 +49,13 @@ int main(void)
 
 	while (TRUE)
 	{
-		palTogglePad(GPIOC, 14);
-		palTogglePad(GPIOC, 13);
 		chThdSleepMilliseconds(500);
-	}
+		rel_unmute();
+		chThdSleepMilliseconds(500);
+		rel_mute();
 
+
+	}
 
 }
 

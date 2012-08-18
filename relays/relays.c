@@ -15,6 +15,10 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+/**
+ * @todo dodělat podporu pro relé na přepinání smyčky + ledky na kanály
+ */
+
 void rel_init(void)
 {
 	//turn off jtag, just swd will works
@@ -22,12 +26,19 @@ void rel_init(void)
 
 	palSetGroupMode(GPIOC, 0b111, 13, PAL_MODE_OUTPUT_PUSHPULL);
 	palSetGroupMode(GPIOB, 0b110111, 3, PAL_MODE_OUTPUT_PUSHPULL);
+	palSetPadMode(GPIOA, 11, PAL_MODE_OUTPUT_PUSHPULL);
+	palSetPadMode(GPIOA, 10, PAL_MODE_OUTPUT_PUSHPULL);
 }
 
-void rel_set_channel(bool_t channel, uint8_t pot)
+void _rel_set_channel(bool_t channel, uint8_t pot)
 {
-	rel_mute();
-	chThdSleepMilliseconds(2);
+	bool_t prev = rel_getMute();
+
+	if (prev == FALSE)
+	{
+		rel_mute();
+		chThdSleepMilliseconds(2);
+	}
 
 	if (channel == TRUE)
 	{
@@ -77,8 +88,13 @@ void rel_set_channel(bool_t channel, uint8_t pot)
 			break;
 		}
 	}
-	chThdSleepMilliseconds(2);
-	rel_unmute();
+
+	if (prev == FALSE)
+	{
+		chThdSleepMilliseconds(2);
+		rel_unmute();
+	}
+
 }
 
 #ifdef RELAY_TESTING

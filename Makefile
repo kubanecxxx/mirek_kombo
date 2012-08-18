@@ -79,10 +79,12 @@ CSRC = $(PORTSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/various/syscalls.c \
+       $(CHIBIOS)/os/various/shell.c \
+       $(CHIBIOS)/os/various/chprintf.c \
        main.c
        
 INCDIR += relays
-CSRC+= relays/relays.c
+CSRC+= relays/relays.c relays/shell_uart.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
