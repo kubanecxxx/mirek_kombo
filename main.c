@@ -50,11 +50,6 @@ int main(void)
 	while (TRUE)
 	{
 		chThdSleepMilliseconds(500);
-		rel_unmute();
-		chThdSleepMilliseconds(500);
-		rel_mute();
-
-
 	}
 
 }

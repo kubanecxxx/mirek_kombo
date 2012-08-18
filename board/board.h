@@ -29,7 +29,8 @@
  * Board identifier.
  */
 #define BOARD_ST_STM32VL_DISCOVERY
-#define BOARD_NAME              "ST Kubanec proprietary"
+//#define BOARD_NAME              "ST Kubanec proprietary"
+#include "hash.h"
 
 /*
  * Board frequencies.
