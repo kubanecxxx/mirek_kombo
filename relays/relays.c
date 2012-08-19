@@ -28,6 +28,12 @@ void rel_init(void)
 	palSetGroupMode(GPIOB, 0b110111, 3, PAL_MODE_OUTPUT_PUSHPULL);
 	palSetPadMode(GPIOA, 11, PAL_MODE_OUTPUT_PUSHPULL);
 	palSetPadMode(GPIOA, 10, PAL_MODE_OUTPUT_PUSHPULL);
+
+	rel_unmute();
+	rel_set_gain(1);
+	rel_set_volume(1);
+	rel_inputHigh();
+	rel_loopOn();
 }
 
 void _rel_set_channel(bool_t channel, uint8_t pot)
@@ -44,21 +50,25 @@ void _rel_set_channel(bool_t channel, uint8_t pot)
 	{
 		switch (pot)
 		{
-		case 1:
+		case 3:
 			_rel_vol1_clear;
 			_rel_vol3_clear;
+			_rel_vol2_clear;
 			break;
 		case 2:
 			_rel_vol1_clear;
 			_rel_vol3_set;
-			break;
-		case 3:
-			_rel_vol1_set;
-			_rel_vol2_clear;
+			_rel_vol2_set;
 			break;
 		case 4:
 			_rel_vol1_set;
+			_rel_vol2_clear;
+			_rel_vol3_clear;
+			break;
+		case 1:
+			_rel_vol1_set;
 			_rel_vol2_set;
+			_rel_vol3_set;
 			break;
 		default:
 			break;
@@ -68,21 +78,25 @@ void _rel_set_channel(bool_t channel, uint8_t pot)
 	{
 		switch (pot)
 		{
-		case 1:
+		case 3:
 			_rel_gain1_clear;
 			_rel_gain3_clear;
+			_rel_gain2_clear;
 			break;
 		case 2:
 			_rel_gain1_clear;
 			_rel_gain3_set;
-			break;
-		case 3:
-			_rel_gain1_set;
-			_rel_gain2_clear;
+			_rel_gain2_set;
 			break;
 		case 4:
 			_rel_gain1_set;
+			_rel_gain2_clear;
+			_rel_gain3_clear;
+			break;
+		case 1:
+			_rel_gain1_set;
 			_rel_gain2_set;
+			_rel_gain3_set;
 			break;
 		default:
 			break;

@@ -39,8 +39,8 @@ extern "C"
 #define rel_mute() palSetPad(GPIOB,3)
 #define rel_unmute() palClearPad(GPIOB,3)
 #define rel_getMute() palReadPad(GPIOB,3)
-#define rel_inputHigh() palSetPad (GPIOC,15)
-#define rel_inputLow() palClearPad (GPIOC,15)
+#define rel_inputHigh() palClearPad (GPIOC,15)
+#define rel_inputLow() palSetPad (GPIOC,15)
 #define rel_loopOn() palClearPad(GPIOA,11)
 #define rel_loopOff() palSetPad(GPIOA,11)
 
